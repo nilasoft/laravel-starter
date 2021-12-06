@@ -1,0 +1,43 @@
+ //  if you dont specify a model =>  api.php -> $actions->httpMethod('purge')
+
+
+    /**
+     * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function purge(): \Illuminate\Http\Response {
+        $this->authorize('deleteAll', Post::class);
+
+        Post::query()->delete();
+
+        return response('', 204);
+    }
+
+
+// if you specify a model =>  api.php -> $actions->withId()->httpMethod('publish')
+
+   /**
+     * Publish a post.
+     *
+     * @param PostSchema $schema
+     * @param PostQuery $query
+     * @param Post $post
+     * @return Responsable
+     */
+    public function publish( PostSchema $schema, PostQuery $query, Post $post): Responsable {
+        $this->authorize('update', $post);
+
+        abort_if($post->published_at, 403, 'Post is already published.');
+
+        $post->update(['published_at' => now()]);
+
+        PostPublished::dispatch($post);
+
+        $model = $schema
+            ->repository()
+            ->queryOne($post)
+            ->withRequest($query)
+            ->first();
+
+        return new DataResponse($model);
+    }

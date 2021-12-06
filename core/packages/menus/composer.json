@@ -1,0 +1,29 @@
+{
+    "name": "nila/menus",
+    "description": "it's a menu generator based on users permissions",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "mortazavi",
+            "email": "s.mohammad027@live.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nila\\Menus\\": "src/"
+        },
+        "files": [
+            "src/Helpers/constants.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Nila\\Menus\\MenusServiceProvider"
+            ]
+        }
+    }
+}

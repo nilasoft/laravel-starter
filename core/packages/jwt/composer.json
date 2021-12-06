@@ -1,0 +1,32 @@
+{
+    "name": "nila/jwt",
+    "description": "Json web token driver for laravel",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "mortazavi",
+            "email": "s.mohammad027@live.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Nila\\Jwt\\": "src/"
+        },
+        "files": [
+            "src/Helpers/functions.php",
+            "src/Helpers/constants.php"
+        ]
+    },
+    "require": {
+        "jenssegers/agent": "^2.6",
+        "lcobucci/jwt": "^4.1"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Nila\\Jwt\\JwtServiceProvider"
+            ]
+        }
+    }
+}
